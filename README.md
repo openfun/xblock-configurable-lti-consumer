@@ -6,6 +6,19 @@ conceptors in CMS several pre-configured versions of LTI Consumer.
 Configurations are stored in Django settings and pre-configured fields are no
 longer modifiable for a given version.
 
+## Installation
+
+This package can be installed with `pip`:
+
+```bash
+$ pip install [--process-dependency-links] configurable_lti_consumer-xblock
+```
+
+Note that the `--process-dependency-links` `pip` option is only required to
+install or test this Xblock as a standalone package. If you plan to install it
+in a base Open edX installation, then you can safely miss this option as the
+only package dependency should already have been resolved.
+
 ## Configuration example
 
 The below example configuration instanciates 2 xblocks.
