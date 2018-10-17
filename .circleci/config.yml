@@ -1,0 +1,145 @@
+# FUN packaging CI
+version: 2
+
+# List jobs that will be integrated and executed in a workflow
+jobs:
+  # Build application package
+  build:
+    docker:
+      - image: circleci/python:2.7-stretch
+
+    steps:
+      - checkout
+
+      # Restore dependencies cache only if nothing has changed in the
+      # `setup.cfg` file. There is no fall-back to older virtual environments to
+      # ensure a clean environment if some dependencies may have been upgraded
+      # or removed.
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "setup.cfg" }}
+
+      # Install package dependencies in a virtual environment
+      - run:
+          name: Install development dependencies
+          command: |
+            virtualenv venv
+            . venv/bin/activate
+            pip install --process-dependency-links  -e .[dev]
+
+      # Cache virtual environment
+      - save_cache:
+          paths:
+            - ./venv
+          key: v1-dependencies-{{ checksum "setup.cfg" }}
+
+      # Build the package (source + wheel binary)
+      - run:
+          name: Build application package
+          command: python setup.py sdist bdist_wheel
+
+      # List files in built archives
+      - run:
+          name: Check built distributions
+          command: |
+            echo ":::: Available distributions ::::"
+            ls dist/*
+
+            echo ":::: Wheel distribution ::::"
+            unzip -l dist/*-py2.py3-none-any.whl
+
+            echo ":::: Source distribution ::::"
+            tar tvzf dist/*.tar.gz
+
+      # Cache built distributions
+      - save_cache:
+          paths:
+            - ./dist
+          key: v1-distributions-{{ checksum "setup.cfg" }}
+
+  # Check that target git tag refers to a master branch commit and matches the
+  # "version" from setup.cfg
+  validate:
+    docker:
+      - image: circleci/python:2.7-stretch
+        environment:
+          # This is the branch that is supposed to contain target commit/tag
+          TARGET_BRANCH: master
+
+    steps:
+      - checkout
+
+      - run:
+          name: Check target tag points to a master branch commit
+          command: |
+            # Get current tag corresponding commit ID
+            tag_commit=$(git rev-list -n 1 $CIRCLE_TAG)
+
+            # Check that the tag refers to a commit in the $TARGET_BRANCH (e.g.
+            # the master branch)
+            git branch -a --contains ${tag_commit} | grep remotes/origin/${TARGET_BRANCH}
+
+            # Check that the current tag (vX.Y.Z) matches the release number in
+            # setup.cfg (X.Y.Z)
+            grep "$(echo $CIRCLE_TAG | sed 's/^v/version = /')" setup.cfg
+
+  # Publishing to PyPI requires that:
+  #   * you already registered to pypi.org
+  #   * you have define both the TWINE_USERNAME & TWINE_PASSWORD secret
+  #     environment variables in CircleCI UI (with your PyPI credentials)
+  pypi:
+    docker:
+      - image: circleci/python:2.7-stretch
+
+    steps:
+      - checkout
+
+      # Restore built packages
+      - restore_cache:
+          keys:
+            - v1-distributions-{{ checksum "setup.cfg" }}
+
+      - run:
+          name: Publish distributions to PyPI
+          command: |
+            echo ":::: Distributions found ::::"
+            ls dist/*
+
+            echo ":::: Publish distributions ::::"
+            twine upload dist/*
+
+# CI workflows
+workflows:
+  version: 2
+
+  # We have a single workflow
+  packaging:
+    jobs:
+      # The build job has no required jobs, hence this will be our first job
+      - build:
+          # Filtering rule to run this job: none (we accept all tags; this job
+          # will always run).
+          filters:
+            tags:
+              only: /.*/
+
+      # Validate git tag (should refer to a master branch commit)
+      - validate:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+
+      # Publish build packages only if the build job succeeds and it has been
+      # tagged with a tag starting with the letter v
+      - pypi:
+          requires:
+            - validate
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
