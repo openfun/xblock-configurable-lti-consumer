@@ -99,6 +99,11 @@ jobs:
           keys:
             - v1-distributions-{{ checksum "setup.cfg" }}
 
+      # Restore python virtualenv
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "setup.cfg" }}
+
       - run:
           name: Publish distributions to PyPI
           command: |
@@ -106,6 +111,7 @@ jobs:
             ls dist/*
 
             echo ":::: Publish distributions ::::"
+            . venv/bin/activate
             twine upload dist/*
 
 # CI workflows
