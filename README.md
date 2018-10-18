@@ -1,10 +1,13 @@
 # Configurable LTI Consumer XBlock
 
-This XBlock inherits, enhances and replaces [edX LTI consumer
-Xblock](https://github.com/edx/xblock-lti-consumer) to make available to
-conceptors in CMS several pre-configured versions of LTI Consumer.
-Configurations are stored in Django settings and pre-configured fields are no
-longer modifiable for a given version.
+This XBlock inherits, enhances and replaces [edX LTI consumer Xblock](https://github.com/edx/xblock-lti-consumer) to make available to conceptors in CMS several preconfigured versions of
+LTI Consumer. Configurations are stored in Django settings instead of course
+advanced settings, and preconfigured fields are no longer modifiable for a given
+version.
+
+If this xblock is not installed or settings are not configured, courses using it
+will safely fall back on regular edX LTI consumer xblock.
+
 
 ## Installation
 
