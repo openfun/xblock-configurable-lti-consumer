@@ -19,6 +19,60 @@ install or test this Xblock as a standalone package. If you plan to install it
 in a base Open edX installation, then you can safely miss this option as the
 only package dependency should already have been resolved.
 
+## Getting started
+
+First things first, if you plan to work on the project itself, you will need to
+clone this repository:
+
+```
+$ git clone git@github.com:openfun/xblock-configurable-lti-consumer.git
+```
+
+Once the project has been cloned on your machine, you will need to build a
+custom edx-platform docker image that includes the xblock and setup a
+development environment that includes all required services up and running (more
+on this later):
+
+```bash
+$ cd xblock-configurable-lti-consumer
+$ make bootstrap
+```
+
+If everything went well, you should now be able to access to the following
+services:
+
+- Open edX LMS: http://localhost:8072
+- Open edX CMS: http://localhost:8082
+
+with the following credentials:
+
+```
+email: admin@foex.edu
+password: openedx-rox
+```
+
+## Developer guide
+
+Once the project has been bootstrapped (see "Getting started" section), to start
+working on the project, use:
+
+```
+$ make dev
+```
+
+You can stop running services _via_:
+
+```
+$ make stop
+```
+
+If for any reason, you need to drop databases and start with fresh ones, use the
+`down` target:
+
+```
+$ make down
+```
+
 ## Configuration example
 
 The below example configuration instanciates 2 xblocks.
