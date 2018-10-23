@@ -14,7 +14,6 @@ logger = logging.getLogger(__name__)
 class ConfigurableLtiConsumerXBlock(LtiConsumerXBlock):
     def __init__(self, *args, **kwargs):
         super(ConfigurableLtiConsumerXBlock, self).__init__(*args, **kwargs)
-
         if not self._runtime.__class__.__name__ == "ImportSystem":
             # We do not need this when importing course in studio
             self.set_editable_field_names()
