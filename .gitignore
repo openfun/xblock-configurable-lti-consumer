@@ -11,6 +11,7 @@
 .redcar/
 codekit-config.json
 .pycharm_helpers/
+.vscode/
 
 ### Testing artifacts
 .coverage
