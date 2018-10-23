@@ -2,6 +2,8 @@ from django.conf import settings
 
 from lti_consumer import LtiConsumerXBlock
 
+from .exceptions import ConfigurableLTIConsumerException
+from .defaults import CONFIGURABLE_LTI_CONSUMER_SETTINGS
 
 
 class ConfigurableLtiConsumerXBlock(LtiConsumerXBlock):
@@ -19,8 +21,7 @@ class ConfigurableLtiConsumerXBlock(LtiConsumerXBlock):
         fields
         """
         template = {}
-        template['metadata'] = cls.get_configuration(
-            boilerplate)["default_values"]
+        template["metadata"] = cls.get_configuration(boilerplate)["default_values"]
         return template
 
     def set_editable_field_names(self):
@@ -28,8 +29,7 @@ class ConfigurableLtiConsumerXBlock(LtiConsumerXBlock):
         Remove from editable_field_names list fields that we already have configured
         """
         self.editable_field_names = list(self.editable_field_names)
-        name = self.description
-        for field, _ in self.get_configuration(name)['default_values'].items():
+        for field, _ in self.get_configuration(self.lti_id)["default_values"].items():
             self.editable_field_names.pop(self.editable_field_names.index(field))
 
     @classmethod
@@ -37,14 +37,14 @@ class ConfigurableLtiConsumerXBlock(LtiConsumerXBlock):
         """
         Retrieving component subclass configuration from Django settings
         """
-        for component in settings.CONFIGURABLE_XBLOCKS_SETTINGS["components"]:
-            if component["module"] == "lti_consumer":
-                conf = [
-                    subclass for subclass in component["subclasses"]
-                    if subclass["name"] == name]
-                if conf:
-                    return conf[0]
-        return None
+
+        for conf_name, configuration in CONFIGURABLE_LTI_CONSUMER_SETTINGS.items():
+            if conf_name == name:
+                return configuration
+        else:
+            raise ConfigurableLTIConsumerException(
+                "Configuration '{name}' does not exist".format(name=name)
+            )
 
     @property
     def lti_provider_key_secret(self):
@@ -52,8 +52,10 @@ class ConfigurableLtiConsumerXBlock(LtiConsumerXBlock):
         Override parent's method to use credentials from Django settings if
         available instead of courses settings
         """
-        name = self.description
-        configuration = self.get_configuration(name)
-        if "lti" in configuration:
-            return configuration["lti"]["key"], configuration["lti"]["secret"]
+        configuration = self.get_configuration(self.lti_id)
+        if "lti_passport_credentials" in configuration:
+            return (
+                configuration["lti_passport_credentials"]["oauth_consumer_key"],
+                configuration["lti_passport_credentials"]["shared_secret"],
+            )
         return super(ConfigurableLtiConsumerXBlock, self).lti_provider_key_secret
