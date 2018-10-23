@@ -17,5 +17,6 @@ codekit-config.json
 .coverage
 var/
 
-# virtualenvironment
+### Development data & tools
 venv/
+data/
