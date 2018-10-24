@@ -18,3 +18,5 @@ PIPELINE_ENABLED = False
 STATICFILES_STORAGE = "openedx.core.storage.DevelopmentStorage"
 
 ALLOWED_HOSTS = ["*"]
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
