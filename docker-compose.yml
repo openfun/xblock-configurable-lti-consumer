@@ -57,6 +57,7 @@ services:
       - ./config/cms/docker_run_development.py:/config/cms/docker_run_development.py
       - ./data/media:/edx/var/edxapp/media
       - ./data/store:/edx/app/edxapp/data
+      - ./docker/files/edx/app/edxapp/edx-platform/cms/djangoapps/contentstore/views/component.py:/edx/app/edxapp/edx-platform/cms/djangoapps/contentstore/views/component.py
     command: >
       dockerize -wait tcp://mysql:3306 -timeout 60s
         python manage.py cms runserver 0.0.0.0:8000 --settings=fun.docker_run_development
