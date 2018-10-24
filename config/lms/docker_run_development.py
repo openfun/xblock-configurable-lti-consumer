@@ -20,3 +20,5 @@ STATICFILES_STORAGE = "openedx.core.storage.DevelopmentStorage"
 ALLOWED_HOSTS = ["*"]
 
 WEBPACK_CONFIG_PATH = "webpack.dev.config.js"
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
