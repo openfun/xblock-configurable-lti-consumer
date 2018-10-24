@@ -110,7 +110,8 @@ CONFIGURABLE_LTI_CONSUMER_SETTINGS = {
             "ask_to_send_email": True
         }
     }
-}```
+}
+```
 
 You also need to set XBLOCK_SELECT_FUNCTION setting to enforce
 configurable_lti_consumer endpoint over lti_consumer's one.
