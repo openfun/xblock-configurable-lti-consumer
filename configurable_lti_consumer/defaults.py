@@ -24,21 +24,22 @@ DEFAULT_CONFIGURABLE_LTI_CONSUMER_SETTINGS = {
             "hide_launch": False,
             "accept_grades_past_due": False,
             "ask_to_send_username": True,
-            "ask_to_send_email": True
-            }
+            "ask_to_send_email": True,
+        },
     },
     "Generic": {
         "display": "Generic LTI xblock",
         "default_values": {
             "lti_id": "Generic",
             "ask_to_send_username": True,
-            "ask_to_send_email": True
-        }
-    }
+            "ask_to_send_email": True,
+        },
+    },
 }
 
 
-
 CONFIGURABLE_LTI_CONSUMER_SETTINGS = getattr(
-    settings, "CONFIGURABLE_LTI_CONSUMER_SETTINGS", DEFAULT_CONFIGURABLE_LTI_CONSUMER_SETTINGS
+    settings,
+    "CONFIGURABLE_LTI_CONSUMER_SETTINGS",
+    DEFAULT_CONFIGURABLE_LTI_CONSUMER_SETTINGS,
 )
