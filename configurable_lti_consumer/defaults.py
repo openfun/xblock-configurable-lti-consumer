@@ -1,6 +1,4 @@
 """Default settings for Configurable LTI Consumer"""
-from django.conf import settings
-
 
 # configurable-lti-consumer sample configuration
 DEFAULT_CONFIGURABLE_LTI_CONSUMER_SETTINGS = {
@@ -36,10 +34,3 @@ DEFAULT_CONFIGURABLE_LTI_CONSUMER_SETTINGS = {
         },
     },
 }
-
-
-CONFIGURABLE_LTI_CONSUMER_SETTINGS = getattr(
-    settings,
-    "CONFIGURABLE_LTI_CONSUMER_SETTINGS",
-    DEFAULT_CONFIGURABLE_LTI_CONSUMER_SETTINGS,
-)

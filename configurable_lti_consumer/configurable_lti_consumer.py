@@ -1,9 +1,8 @@
 from django.conf import settings
-
 from lti_consumer import LtiConsumerXBlock
 
+from .defaults import DEFAULT_CONFIGURABLE_LTI_CONSUMER_SETTINGS
 from .exceptions import ConfigurableLTIConsumerException
-from .defaults import CONFIGURABLE_LTI_CONSUMER_SETTINGS
 
 
 class ConfigurableLtiConsumerXBlock(LtiConsumerXBlock):
@@ -38,7 +37,11 @@ class ConfigurableLtiConsumerXBlock(LtiConsumerXBlock):
         Retrieving component subclass configuration from Django settings
         """
 
-        for conf_name, configuration in CONFIGURABLE_LTI_CONSUMER_SETTINGS.items():
+        for conf_name, configuration in getattr(
+            settings,
+            "CONFIGURABLE_LTI_CONSUMER_SETTINGS",
+            DEFAULT_CONFIGURABLE_LTI_CONSUMER_SETTINGS,
+        ).items():
             if conf_name == name:
                 return configuration
         else:

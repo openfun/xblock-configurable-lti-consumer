@@ -3,8 +3,6 @@
 Helper fonctions
 """
 
-from django.conf import settings
-
 
 def add_dynamic_components(
     CONFIGURABLE_LTI_CONSUMER_SETTINGS,
