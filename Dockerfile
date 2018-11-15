@@ -31,7 +31,11 @@ RUN pip install --no-cache-dir --src /usr/local/src -e /edx/app/xblock
 # FIXME: as mentionned in fun-platform and edx-platform bug tracker, this
 # webpack-stats.json is required both in production and development in a static
 # directory 😢
+#
+# Also, the /edx/var tree should be writable by the running user to perform
+# collectstatic and migrations.
 RUN mkdir -p /edx/app/edxapp/staticfiles/studio && \
+    chown -R edx:edx /edx/var && \
     cp /edx/app/edxapp/edx-platform/common/static/webpack-stats.json /edx/app/edxapp/staticfiles/ && \
     cp /edx/app/edxapp/edx-platform/common/static/studio/webpack-stats.json /edx/app/edxapp/staticfiles/studio/
 

@@ -8,12 +8,12 @@ COMPOSE_RUN      = $(COMPOSE) run --rm
 COMPOSE_EXEC     = $(COMPOSE) exec
 
 # Django
-MANAGE_LMS       = $(COMPOSE_EXEC) lms python manage.py lms --settings=fun.docker_run_development
-MANAGE_CMS       = $(COMPOSE_EXEC) cms python manage.py cms --settings=fun.docker_run_development
+MANAGE_LMS       = $(COMPOSE_EXEC) lms dockerize -wait tcp://mysql:3306 -timeout 60s python manage.py lms --settings=fun.docker_run_development
+MANAGE_CMS       = $(COMPOSE_EXEC) cms dockerize -wait tcp://mysql:3306 -timeout 60s python manage.py cms --settings=fun.docker_run_development
 
 default: help
 
-bootstrap: build dev migrate superuser ## bootstrap the project
+bootstrap: tree build dev migrate superuser ## bootstrap the project
 
 build:  ## build the xblock image
 	$(COMPOSE) build lms
@@ -43,6 +43,10 @@ stop:  ## stop running services
 superuser:  ## create openedx superuser
 	$(MANAGE_LMS) shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@foex.edu', 'openedx-rox')";
 .PHONY: superuser
+
+tree:  ## create data directories mounted as volumes
+	bash -c "mkdir -p data/{media,store}"
+.PHONY: tree
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
