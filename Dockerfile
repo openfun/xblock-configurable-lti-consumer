@@ -25,8 +25,9 @@ RUN mkdir /edx/var && \
 # Copy the app to the working directory
 COPY --chown=edx:edx . /edx/app/xblock/
 
-# Install development dependencies in a virtualenv
-RUN pip install --no-cache-dir --src /usr/local/src -e /edx/app/xblock
+# Install development dependencies and perform a base installation of the xblock
+RUN cd /edx/app/xblock/ && \
+    pip install --no-cache-dir .
 
 # FIXME: as mentionned in fun-platform and edx-platform bug tracker, this
 # webpack-stats.json is required both in production and development in a static
