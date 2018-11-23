@@ -34,7 +34,9 @@ services:
     ports:
       - "8072:8000"
     volumes:
-      - .:/edx/app/xblock
+      # Override installed xblock with the xblock source directory to provide an
+      # editable environment
+      - ./configurable_lti_consumer:/usr/local/lib/python2.7/dist-packages/configurable_lti_consumer
       - ./config/lms/docker_run_development.py:/config/lms/docker_run_development.py
       - ./data/media:/edx/var/edxapp/media
       - ./data/store:/edx/app/edxapp/data
@@ -53,7 +55,9 @@ services:
     ports:
       - "8082:8000"
     volumes:
-      - .:/edx/app/xblock
+      # Override installed xblock with the xblock source directory to provide an
+      # editable environment
+      - ./configurable_lti_consumer:/usr/local/lib/python2.7/dist-packages/configurable_lti_consumer
       - ./config/cms/docker_run_development.py:/config/cms/docker_run_development.py
       - ./data/media:/edx/var/edxapp/media
       - ./data/store:/edx/app/edxapp/data
