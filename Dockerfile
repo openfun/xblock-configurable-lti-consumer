@@ -25,7 +25,7 @@ RUN mkdir /edx/var && \
 # Copy the app to the working directory
 COPY --chown=edx:edx . /edx/app/xblock/
 
-# Install development dependencies and perform a base installation of the xblock
+# Install development dependencies and perform a base installation of the XBlock
 RUN cd /edx/app/xblock/ && \
     pip install --no-cache-dir .
 

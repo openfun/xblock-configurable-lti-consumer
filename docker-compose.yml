@@ -38,6 +38,7 @@ services:
       # editable environment
       - ./configurable_lti_consumer:/usr/local/lib/python2.7/dist-packages/configurable_lti_consumer
       - ./config/lms/docker_run_development.py:/config/lms/docker_run_development.py
+      - ./config/settings.yml:/config/lms/settings.yml
       - ./data/media:/edx/var/edxapp/media
       - ./data/store:/edx/app/edxapp/data
     command: >
@@ -59,6 +60,7 @@ services:
       # editable environment
       - ./configurable_lti_consumer:/usr/local/lib/python2.7/dist-packages/configurable_lti_consumer
       - ./config/cms/docker_run_development.py:/config/cms/docker_run_development.py
+      - ./config/settings.yml:/config/cms/settings.yml
       - ./data/media:/edx/var/edxapp/media
       - ./data/store:/edx/app/edxapp/data
       - ./docker/files/edx/app/edxapp/edx-platform/cms/djangoapps/contentstore/views/component.py:/edx/app/edxapp/edx-platform/cms/djangoapps/contentstore/views/component.py

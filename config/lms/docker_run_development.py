@@ -24,6 +24,7 @@ ALLOWED_HOSTS = ["*"]
 WEBPACK_CONFIG_PATH = "webpack.dev.config.js"
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
-# helper function that will be passed to XBlock.load_class
-# method to filter multiple Python endpoints for the same xblock (lti_consumer)
-XBLOCK_SELECT_FUNCTION = filter_configurable_lti_consumer
+
+LTI_XBLOCK_CONFIGURATIONS = config(
+    "LTI_XBLOCK_CONFIGURATIONS", default=[], formatter=json.loads
+)

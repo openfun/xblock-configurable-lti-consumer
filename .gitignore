@@ -20,3 +20,6 @@ var/
 ### Development data & tools
 venv/
 data/
+
+### Secrets
+settings.yml

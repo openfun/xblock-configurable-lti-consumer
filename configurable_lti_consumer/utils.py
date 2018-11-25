@@ -2,31 +2,47 @@
 """
 Helper fonctions
 """
+from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
+from django.utils.translation import ugettext as _
 
 
 def add_dynamic_components(
-    CONFIGURABLE_LTI_CONSUMER_SETTINGS,
+    configurations,
     advanced_component_templates,
     categories,
     create_template_dict,
     course_advanced_keys,
 ):
     """
-    Reads CONFIGURABLE_LTI_CONSUMER_SETTINGS to create related buttons
-    in studio to instanciate configured xblocks.
-    When this xblock is installed, configurations are added to studio
-    even if it is not in course advanced modules
+    Create, for each custom configuration of the LTI configurable XBlock, a link behind the
+    `Advanced` components button in the Studio.
+
+    Don't add a link for configurations that don't define a boilerplate. This type of
+    configuration is useful to force a behavior on LTI consumer XBlocks matching a
+    launch url pattern without proposing a specific component to the user.
     """
-    for name, configuration in CONFIGURABLE_LTI_CONSUMER_SETTINGS.items():
-        advanced_component_templates["templates"].append(
-            create_template_dict(
-                name=configuration["display"],
-                category="lti_consumer",
-                support_level=False,
-                boilerplate_name=name,
+    seen = set()
+    for configuration in configurations:
+        display_name = configuration.get("display_name")
+        if display_name:
+            if display_name in seen:
+                raise ImproperlyConfigured(
+                    "LTI Xblock configurations should have unique display names: {:s}.".format(
+                        display_name
+                    )
+                )
+            seen.add(display_name)
+            advanced_component_templates["templates"].append(
+                create_template_dict(
+                    name=display_name,
+                    category="lti_consumer",
+                    support_level=False,
+                    boilerplate_name=display_name,
+                )
             )
-        )
-    # Remove overrided lti_consumer, if it was added to course advanced modules
+
+    # Remove overriden lti_consumer, if it was added to course advanced modules
     try:
         course_advanced_keys.pop(course_advanced_keys.index("lti_consumer"))
     except ValueError:

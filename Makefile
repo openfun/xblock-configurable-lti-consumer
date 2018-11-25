@@ -15,11 +15,14 @@ default: help
 
 bootstrap: tree build dev migrate superuser ## bootstrap the project
 
-build:  ## build the xblock image
+build:  ## build the XBlock image
 	$(COMPOSE) build lms
 .PHONY: build
 
-dev:  ## start the lms service (and its dependencies)
+config/settings.yml:
+	cp config/settings.yml.dist config/settings.yml
+
+dev: config/settings ## start the lms service (and its dependencies)
 	$(COMPOSE) up -d cms
 .PHONY: dev
 
@@ -41,7 +44,7 @@ stop:  ## stop running services
 .PHONY: stop
 
 superuser:  ## create openedx superuser
-	$(MANAGE_LMS) shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@foex.edu', 'openedx-rox')";
+	$(MANAGE_LMS) shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.filter(username='admin').exists() or User.objects.create_superuser('admin', 'admin@example.com', 'admin')";
 .PHONY: superuser
 
 tree:  ## create data directories mounted as volumes
