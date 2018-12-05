@@ -1,6 +1,11 @@
 import re
 
 from django.conf import settings
+
+from xblock.fragment import Fragment
+
+from xblockutils.resources import ResourceLoader
+
 from lti_consumer import LtiConsumerXBlock
 
 from .exceptions import ConfigurableLTIConsumerException
@@ -122,3 +127,47 @@ class ConfigurableLtiConsumerXBlock(LtiConsumerXBlock):
         ):
             return (configuration["oauth_consumer_key"], configuration["shared_secret"])
         return super(ConfigurableLtiConsumerXBlock, self).lti_provider_key_secret
+
+    def student_view(self, context):
+        """
+        LMS and CMS view for configurable_lti_consumer.
+        Will make a post request to lti_launch_handler view with
+        LTI parameters and open response in an iframe or a new window
+        depending on the xblock instance configuration.
+        Arguments:
+            context (dict): XBlock context
+        Returns:
+            xblock.fragment.Fragment: XBlock HTML fragment
+        """
+        fragment = Fragment()
+        configurable_lti_consumer_loader = ResourceLoader(__name__)
+        lti_consumer_loader = ResourceLoader(
+            "lti_consumer"
+        )  # ressource loader of inherited lti_consumer
+        context.update(self._get_context_for_template())
+        fragment.add_content(
+            configurable_lti_consumer_loader.render_mako_template(
+                "/templates/html/student.html", context
+            )
+        )
+        fragment.add_css(lti_consumer_loader.load_unicode("static/css/student.css"))
+        fragment.add_javascript(
+            lti_consumer_loader.load_unicode("static/js/xblock_lti_consumer.js")
+        )
+
+        if context["inline_height"]:
+            fragment.initialize_js("LtiConsumerXBlock")
+        else:  # iframe height will be set by iframeResizer lib
+            fragment.add_javascript(
+                configurable_lti_consumer_loader.load_unicode(
+                    "static/js/vendor/iframeResizer.min.js"
+                )
+            )
+            fragment.add_javascript(
+                configurable_lti_consumer_loader.load_unicode(
+                    "static/js/configurable_xblock_lti_consumer.js"
+                )
+            )
+            fragment.initialize_js("configurableLTIConsumerXblockIframeResizerInit")
+
+        return fragment
