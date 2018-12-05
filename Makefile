@@ -22,7 +22,7 @@ build:  ## build the XBlock image
 config/settings.yml:
 	cp config/settings.yml.dist config/settings.yml
 
-dev: config/settings ## start the lms service (and its dependencies)
+dev: config/settings.yml  ## start the lms service (and its dependencies)
 	$(COMPOSE) up -d cms
 .PHONY: dev
 
