@@ -1,0 +1,2 @@
+recursive-include configurable_lti_consumer/templates *.html
+recursive-include configurable_lti_consumer/static *.js
