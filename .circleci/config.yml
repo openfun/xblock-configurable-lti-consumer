@@ -55,7 +55,7 @@ jobs:
       - save_cache:
           paths:
             - ./dist
-          key: v1-distributions-{{ checksum "setup.cfg" }}
+          key: v1-distributions-{{ .Revision }}
 
   # Check that target git tag refers to a master branch commit and matches the
   # "version" from setup.cfg
@@ -97,7 +97,7 @@ jobs:
       # Restore built packages
       - restore_cache:
           keys:
-            - v1-distributions-{{ checksum "setup.cfg" }}
+            - v1-distributions-{{ .Revision }}
 
       # Restore python virtualenv
       - restore_cache:
