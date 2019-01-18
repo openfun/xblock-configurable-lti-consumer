@@ -8,6 +8,12 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.0.0-rc.4] - 2019-01-18
+
+### Fixed
+
+- Add front-end package data to manifest.in so it is collected during the build
+
 ## [1.0.0-rc.3] - 2019-01-18
 
 ### Fixed
@@ -29,7 +35,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 This is a first release candidate for production.
 
-[unreleased]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.0.0-rc.3...master
+[unreleased]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.0.0-rc.4...master
+[1.0.0-rc.4]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.0.0-rc.3...v1.0.0-rc.4
 [1.0.0-rc.3]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.0.0-rc.2...v1.0.0-rc.3
 [1.0.0-rc.2]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.0.0-rc.1...v1.0.0-rc.2
 [1.0.0-rc.1]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v0.2.1...v1.0.0-rc.1
