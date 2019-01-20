@@ -3,10 +3,11 @@ LTI_XBLOCK_CONFIGURATIONS:
   - display_name: Marsha Video
     oauth_consumer_key: InsecureOauthConsumerKey
     shared_secret: InsecureSharedSecret
+    is_launch_url_regex: true
     defaults:
       lti_id: marsha
       launch_target: iframe
-      launch_url: https://marsha.education/lti-video/
+      launch_url: https://marsha\.education/lti/videos/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}
       custom_parameters: []
       button_text: button
       modal_height: 400

@@ -2,11 +2,10 @@ import re
 
 from django.conf import settings
 
-from xblock.fragment import Fragment
-
-from xblockutils.resources import ResourceLoader
-
+import exrex
 from lti_consumer import LtiConsumerXBlock
+from xblock.fragment import Fragment
+from xblockutils.resources import ResourceLoader
 
 from .exceptions import ConfigurableLTIConsumerException
 
@@ -39,7 +38,9 @@ class ConfigurableLtiConsumerXBlock(LtiConsumerXBlock):
         We need this so that the value of our preconfigured fields is set in Mongodb when
         creating the XBlock:
         - this is absolutely required for the `launch_url` field because it is used to associate
-          the xblock with a configuration,
+          the xblock with a configuration. The launch url can be either a fixed value or a dynamic
+          value that is generated randomly following the regex (using
+          https://github.com/asciimoo/exrexthat) that is assumed to be passed as configuration,
         - this is still desired for other preconfigured fields because it ensures that the xblock
           will look the same if the course is exported and re-imported to an instance of Open edX
           on which the configurable XBlock module is not installed. Note that if the values are
@@ -52,8 +53,13 @@ class ConfigurableLtiConsumerXBlock(LtiConsumerXBlock):
         else:
             configuration = {}
 
+        # Copy the dictionary because muting it would break the next iteration of exrex.getone
+        defaults = configuration.get("defaults", {}).copy()
+        if configuration.get("is_launch_url_regex", False):
+            defaults["launch_url"] = exrex.getone(defaults["launch_url"])
+
         template = {}
-        template["metadata"] = configuration.get("defaults", {})
+        template["metadata"] = defaults
         return template
 
     def __getattribute__(self, item):
