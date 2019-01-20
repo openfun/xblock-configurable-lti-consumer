@@ -66,6 +66,7 @@ LTI_XBLOCK_CONFIGURATIONS = [
         "display_name": "Marsha Video",
         "oauth_consumer_key": "InsecureOauthConsumerKey",
         "shared_secret": "InsecureSharedSecret",
+        "is_launch_url_regex": True,
         "hidden_fields": [
             "lti_id",
             "description",
@@ -93,7 +94,7 @@ LTI_XBLOCK_CONFIGURATIONS = [
             "hide_launch": False,
             "launch_target": "iframe",
             "modal_width": 80,
-            "launch_url": "https://marsha.education/lti-video/",
+            "launch_url": "https://marsha\.education/lti/videos/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
             "lti_id": "marsha",
         },
     },
