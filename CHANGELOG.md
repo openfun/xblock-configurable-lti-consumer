@@ -8,6 +8,13 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.1.0] - 2019-01-21
+
+### Added
+
+- Allow defining the LTI launch url as a regex. The idea is to dynamically generate a random url
+  that matches this regex, each time an XBlock is added.
+
 ## [1.0.0-rc.4] - 2019-01-18
 
 ### Fixed
@@ -35,7 +42,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 This is a first release candidate for production.
 
-[unreleased]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.0.0-rc.4...master
+[unreleased]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.1.0...master
+[1.1.0]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.0.0-rc.4...v1.1.0
 [1.0.0-rc.4]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.0.0-rc.3...v1.0.0-rc.4
 [1.0.0-rc.3]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.0.0-rc.2...v1.0.0-rc.3
 [1.0.0-rc.2]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.0.0-rc.1...v1.0.0-rc.2
