@@ -4,6 +4,8 @@ LTI_XBLOCK_CONFIGURATIONS:
     oauth_consumer_key: InsecureOauthConsumerKey
     shared_secret: InsecureSharedSecret
     is_launch_url_regex: true
+    automatic_resizing: true
+    inline_ratio: 0.5625 # 16/9
     defaults:
       lti_id: marsha
       launch_target: iframe
