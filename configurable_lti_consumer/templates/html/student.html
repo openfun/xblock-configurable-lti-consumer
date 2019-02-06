@@ -63,14 +63,12 @@
         </section>
     % endif
     % if launch_target == 'iframe':
-        % if inline_height:
-            <div style="height: ${inline_height}px;">
-        % else:
-            ## iframeResizer will automaticaly set iframe height
-            <div>
-        % endif
-            ## The result of the LTI launch form submit will be rendered here.
-            <%include file="templates/html/lti_iframe.html" args="initial_launch_url=form_url"/>
+        <div data-automatic-resizing="${automatic_resizing}"
+             data-inline-ratio="${inline_ratio}"
+             data-inline-height="${inline_height}">
+
+        ## The result of the LTI launch form submit will be rendered here.
+        <%include file="templates/html/lti_iframe.html" args="initial_launch_url=form_url"/>
         </div>
     % endif
 % elif not hide_launch:

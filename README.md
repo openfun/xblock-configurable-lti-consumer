@@ -67,6 +67,8 @@ LTI_XBLOCK_CONFIGURATIONS = [
         "oauth_consumer_key": "InsecureOauthConsumerKey",
         "shared_secret": "InsecureSharedSecret",
         "is_launch_url_regex": True,
+        "automatic_resizing": True,
+        "inline_ratio": 0.5625,
         "hidden_fields": [
             "lti_id",
             "description",
@@ -99,7 +101,7 @@ LTI_XBLOCK_CONFIGURATIONS = [
         },
     },
     {
-        "pattern": ".*ltiapps\\.net.*",
+        "pattern": ".*ltiapps\.net.*",
         "hidden_fields": ["launch_target"],
         "defaults": {"launch_target": "modal"},
     },
@@ -107,6 +109,7 @@ LTI_XBLOCK_CONFIGURATIONS = [
         "display_name": "LTI consumer",
         "pattern": ".*",
         "hidden_fields": ["ask_to_send_username", "ask_to_send_email"],
+        "automatic_resizing": False,
         "defaults": {
             "ask_to_send_email": True,
             "launch_target": "new_window",

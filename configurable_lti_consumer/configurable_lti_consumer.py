@@ -4,7 +4,7 @@ from django.conf import settings
 
 import exrex
 from lti_consumer import LtiConsumerXBlock
-from xblock.fragment import Fragment
+from web_fragments.fragment import Fragment
 from xblockutils.resources import ResourceLoader
 
 from .exceptions import ConfigurableLTIConsumerException
@@ -143,7 +143,7 @@ class ConfigurableLtiConsumerXBlock(LtiConsumerXBlock):
         Arguments:
             context (dict): XBlock context
         Returns:
-            xblock.fragment.Fragment: XBlock HTML fragment
+            web_fragment.fragment.Fragment: XBlock HTML fragment
         """
         fragment = Fragment()
         configurable_lti_consumer_loader = ResourceLoader(__name__)
@@ -151,29 +151,41 @@ class ConfigurableLtiConsumerXBlock(LtiConsumerXBlock):
             "lti_consumer"
         )  # ressource loader of inherited lti_consumer
         context.update(self._get_context_for_template())
-        fragment.add_content(
-            configurable_lti_consumer_loader.render_mako_template(
-                "/templates/html/student.html", context
-            )
-        )
         fragment.add_css(lti_consumer_loader.load_unicode("static/css/student.css"))
         fragment.add_javascript(
             lti_consumer_loader.load_unicode("static/js/xblock_lti_consumer.js")
         )
 
-        if context["inline_height"]:
-            fragment.initialize_js("LtiConsumerXBlock")
-        else:  # iframe height will be set by iframeResizer lib
+        configuration = self.get_configuration(self.launch_url)
+
+        # Automatic resizing
+        if configuration.get("automatic_resizing"):
+            context["automatic_resizing"] = configuration["automatic_resizing"]
             fragment.add_javascript(
                 configurable_lti_consumer_loader.load_unicode(
                     "static/js/vendor/iframeResizer.min.js"
                 )
             )
-            fragment.add_javascript(
-                configurable_lti_consumer_loader.load_unicode(
-                    "static/js/configurable_xblock_lti_consumer.js"
-                )
-            )
-            fragment.initialize_js("configurableLTIConsumerXblockIframeResizerInit")
+        else:
+            context["automatic_resizing"] = None
 
+        # Inline ratio
+        context["inline_ratio"] = configuration.get("inline_ratio", None)
+
+        fragment.add_javascript(
+            configurable_lti_consumer_loader.load_unicode(
+                "static/js/configurable_xblock_lti_consumer.js"
+            )
+        )
+
+        json_args = {"element_id": context["element_id"]}
+        fragment.initialize_js(
+            "configurableLTIConsumerXblockIframeResizerInit", json_args=json_args
+        )
+
+        fragment.add_content(
+            configurable_lti_consumer_loader.render_mako_template(
+                "/templates/html/student.html", context
+            )
+        )
         return fragment
