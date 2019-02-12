@@ -64,17 +64,16 @@ class ConfigurableLtiConsumerXBlock(LtiConsumerXBlock):
 
     def __getattribute__(self, item):
         """
-        First look for the value of a field in our XBlock settings and default to the normal
-        behavior which is to retrieve the value stored in Mongodb.
+        First look for the value of a field in our XBlock settings (only for fields that have a
+        default AND are hidden) and default to the normal behavior which is to retrieve the value
+        stored in Mongodb.
         """
         # We always need to get the `launch_url` from Mongodb because it is used to associate the
         # XBlock with a configuration.
         if item != "launch_url" and item in LtiConsumerXBlock.editable_field_names:
-            # Better ask for forgiveness than ask for permission...
-            try:
-                return self.get_configuration(self.launch_url)["defaults"][item]
-            except KeyError:
-                pass
+            configuration = self.get_configuration(self.launch_url)
+            if item in configuration["defaults"] and item in configuration['hidden_fields']:
+                return configuration["defaults"][item]
         return super(ConfigurableLtiConsumerXBlock, self).__getattribute__(item)
 
     @classmethod
