@@ -25,7 +25,7 @@ jobs:
           command: |
             virtualenv venv
             . venv/bin/activate
-            pip install --process-dependency-links  -e .[dev]
+            pip install -e .[dev]
 
       # Cache virtual environment
       - save_cache:
