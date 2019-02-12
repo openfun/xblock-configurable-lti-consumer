@@ -124,14 +124,19 @@ class ConfigurableLtiConsumerXBlock(LtiConsumerXBlock):
     def lti_provider_key_secret(self):
         """
         Override parent's method to use credentials from Django settings if
-        available instead of courses settings
+        available if no credentials are declared in the course.
         """
-        configuration = self.get_configuration(self.launch_url)
-        if configuration.get("oauth_consumer_key") and configuration.get(
-            "shared_secret"
-        ):
-            return (configuration["oauth_consumer_key"], configuration["shared_secret"])
-        return super(ConfigurableLtiConsumerXBlock, self).lti_provider_key_secret
+        key, secret = super(ConfigurableLtiConsumerXBlock, self).lti_provider_key_secret
+
+        if not (key and secret):
+            configuration = self.get_configuration(self.launch_url)
+            if configuration.get("oauth_consumer_key") and configuration.get(
+                "shared_secret"
+            ):
+                key = configuration["oauth_consumer_key"]
+                secret = configuration["shared_secret"]
+
+        return key, secret
 
     def student_view(self, context):
         """
