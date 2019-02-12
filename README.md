@@ -17,13 +17,13 @@ Here are a few examples of what this module brings to Open edX:
 This package can be installed with `pip`:
 
 ```bash
-$ pip install [--process-dependency-links] configurable_lti_consumer-xblock
+$ pip install configurable_lti_consumer-xblock
 ```
 
-Note that the `--process-dependency-links` `pip` option is only required to
-install or test this XBlock as a standalone package. If you plan to install it
-in a base Open edX installation, then you can safely miss this option as the
-only package dependency should already have been resolved.
+> `pip>=1.8.1` is required to process package dependencies if you are willing to
+> install or test this XBlock as a standalone package. If you plan to install it
+> in a base Open edX installation, then you can safely use an older `pip`
+> release.
 
 ## Getting started
 
