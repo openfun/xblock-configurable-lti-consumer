@@ -8,6 +8,21 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.2.0] - 2019-02-13
+
+### Added
+
+- Give precedence to a passport defined in the course over the passport defined in our settings,
+- Allow presetting the iframe height with a correct ratio to avoid a black box flickering when
+  the page loads.
+
+### Fixed
+
+- Allow setting visible fields dynamically from the Studio (hidden fields are still taken from
+  the configuration in settings),
+- Replace the deprecated pip option `--process-dependency-links` by a PEP 508 URL (was introduced
+  in pip 18.1 release).
+
 ## [1.1.0] - 2019-01-21
 
 ### Added
@@ -19,13 +34,13 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Fixed
 
-- Add front-end package data to manifest.in so it is collected during the build
+- Add front-end package data to manifest.in so it is collected during the build.
 
 ## [1.0.0-rc.3] - 2019-01-18
 
 ### Fixed
 
-- Fix CI bug that generated distribution packages not in line with git tag
+- Fix CI bug that generated distribution packages not in line with git tag.
 
 ## [1.0.0-rc.2] - 2019-01-15
 
@@ -42,7 +57,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 This is a first release candidate for production.
 
-[unreleased]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.1.0...master
+[unreleased]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.0...master
+[1.2.0]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.0.0-rc.4...v1.1.0
 [1.0.0-rc.4]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.0.0-rc.3...v1.0.0-rc.4
 [1.0.0-rc.3]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.0.0-rc.2...v1.0.0-rc.3
