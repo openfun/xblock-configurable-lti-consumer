@@ -8,6 +8,13 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.2.1] - 2019-02-14
+
+### Fixed
+
+- Remove edX LTI consumer Xblock as a dependency as Pypi does not allow
+  publishing a package with dependencies listed as PEP 508 URLs.
+
 ## [1.2.0] - 2019-02-13
 
 ### Added
@@ -57,7 +64,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 This is a first release candidate for production.
 
-[unreleased]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.0...master
+[unreleased]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.1...master
+[1.2.1]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.0.0-rc.4...v1.1.0
 [1.0.0-rc.4]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.0.0-rc.3...v1.0.0-rc.4
