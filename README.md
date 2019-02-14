@@ -20,10 +20,16 @@ This package can be installed with `pip`:
 $ pip install configurable_lti_consumer-xblock
 ```
 
-> `pip>=1.8.1` is required to process package dependencies if you are willing to
-> install or test this XBlock as a standalone package. If you plan to install it
-> in a base Open edX installation, then you can safely use an older `pip`
-> release.
+Edx's [lti_consumer-xblock](https://github.com/edx/xblock-lti-consumer) is
+required as an extra dependency if you are willing to install or test this
+XBlock as a standalone package. You can install it separately with `pip`:
+
+```bash
+$ pip install git+https://github.com/edx/xblock-lti-consumer@v1.1.8#egg=lti-consumer-xblock
+```
+
+If you plan to install it in a base Open edX installation, this dependency will
+already be available, and thus you don't need to execute the above command.
 
 ## Getting started
 
