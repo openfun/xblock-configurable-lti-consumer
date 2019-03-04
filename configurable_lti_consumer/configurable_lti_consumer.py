@@ -128,15 +128,21 @@ class ConfigurableLtiConsumerXBlock(LtiConsumerXBlock):
         Override parent's method to use credentials from Django settings if
         available if no credentials are declared in the course.
         """
+        # First look for credentials in the course settings
         key, secret = super(ConfigurableLtiConsumerXBlock, self).lti_provider_key_secret
-
         if not (key and secret):
+            # Default to credentials defined in the dedicated secret setting or in last
+            # resort, in the configuration setting:
             configuration = self.get_configuration(self.launch_url)
-            if configuration.get("oauth_consumer_key") and configuration.get(
-                "shared_secret"
-            ):
-                key = configuration["oauth_consumer_key"]
-                secret = configuration["shared_secret"]
+            credentials = getattr(settings, "LTI_XBLOCK_SECRETS", {}).get(
+                self.lti_id, {}
+            )
+            key = credentials.get(
+                "oauth_consumer_key", configuration.get("oauth_consumer_key")
+            )
+            secret = credentials.get(
+                "shared_secret", configuration.get("shared_secret")
+            )
 
         return key, secret
 

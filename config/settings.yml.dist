@@ -1,8 +1,6 @@
 LTI_XBLOCK_CONFIGURATIONS:
   # A configuration that adds a Marsha Video XBlock
   - display_name: Marsha Video
-    oauth_consumer_key: InsecureOauthConsumerKey
-    shared_secret: InsecureSharedSecret
     is_launch_url_regex: true
     automatic_resizing: true
     inline_ratio: 0.5625 # 16/9
@@ -54,3 +52,8 @@ LTI_XBLOCK_CONFIGURATIONS:
     hidden_fields:
       - ask_to_send_username
       - ask_to_send_email
+
+LTI_XBLOCK_SECRETS:
+  marsha:
+    oauth_consumer_key: InsecureOauthConsumerKey
+    shared_secret: InsecureSharedSecret

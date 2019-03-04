@@ -137,6 +137,19 @@ This configuration does several things:
 The order of each configuration in this list is important because we will use, for a given
 XBlock, the first configuration pattern that matches its launch url.
 
+If you wish to encrypt the `oauth_consumer_key` and `shared_secret` credentials and keep the
+other settings visible, you can declare one of them or both in a separate setting
+`LTI_XBLOCK_CONFIGURATIONS`, using the `lti_id` as mapping key:
+
+```python
+LTI_XBLOCK_CONFIGURATIONS = {
+    "marsha": {
+        "oauth_consumer_key": "InsecureOauthConsumerKey",
+        "shared_secret": "InsecureSharedSecret",
+    }
+}
+```
+
 Note that the workbench included in the present repository is running this configuration
 (see [config/settings.yml.dist](./config/settings.yml.dist)) on the official France Université Numérique
 [Open edX extended Docker image](https://github.com/openfun/openedx-docker).
