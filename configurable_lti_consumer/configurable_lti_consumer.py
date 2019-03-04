@@ -72,7 +72,9 @@ class ConfigurableLtiConsumerXBlock(LtiConsumerXBlock):
         # XBlock with a configuration.
         if item != "launch_url" and item in LtiConsumerXBlock.editable_field_names:
             configuration = self.get_configuration(self.launch_url)
-            if item in configuration["defaults"] and item in configuration['hidden_fields']:
+            if item in configuration.get("defaults", []) and item in configuration.get(
+                "hidden_fields", []
+            ):
                 return configuration["defaults"][item]
         return super(ConfigurableLtiConsumerXBlock, self).__getattribute__(item)
 
