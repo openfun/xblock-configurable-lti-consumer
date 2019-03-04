@@ -139,10 +139,10 @@ XBlock, the first configuration pattern that matches its launch url.
 
 If you wish to encrypt the `oauth_consumer_key` and `shared_secret` credentials and keep the
 other settings visible, you can declare one of them or both in a separate setting
-`LTI_XBLOCK_CONFIGURATIONS`, using the `lti_id` as mapping key:
+`LTI_XBLOCK_SECRETS`, using the `lti_id` as mapping key:
 
 ```python
-LTI_XBLOCK_CONFIGURATIONS = {
+LTI_XBLOCK_SECRETS = {
     "marsha": {
         "oauth_consumer_key": "InsecureOauthConsumerKey",
         "shared_secret": "InsecureSharedSecret",
