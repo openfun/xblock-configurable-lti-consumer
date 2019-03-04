@@ -8,6 +8,17 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.2.2] - 2019-03-04
+
+### Added
+
+- Allow configuring credentials separately (`oauth_consumer_key` and `shared_secret`), so we
+  don't need to encrypt all settings to hide secrets.
+
+### Fixed
+
+- Fix getting fields values when defaults or hidden fields are not defined.
+
 ## [1.2.1] - 2019-02-14
 
 ### Fixed
@@ -64,7 +75,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 This is a first release candidate for production.
 
-[unreleased]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.1...master
+[unreleased]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.2...master
+[1.2.2]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.0.0-rc.4...v1.1.0
