@@ -88,7 +88,6 @@ class ConfigurableLtiConsumerXBlock(LtiConsumerXBlock):
         """
         # we need a serializable value to use as our cache key
         launch_url = launch_url or ""
-
         # First, try returning the value direcly from the cache
         try:
             return getattr(cls, "_configuration_cache", {})[launch_url]
@@ -106,7 +105,6 @@ class ConfigurableLtiConsumerXBlock(LtiConsumerXBlock):
             if not pattern:
                 default_url = configuration.get("defaults", {}).get("launch_url", ".*")
                 pattern = r"^{}$".format(default_url)
-
             if re.match(pattern, launch_url):
                 # This configuration is matching, let's use it!
                 break
