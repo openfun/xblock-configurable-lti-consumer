@@ -8,6 +8,12 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.2.3] - 2019-03-18
+
+### Fixed
+
+- Fix missing exceptions import causing crash in case of misconfiguration
+
 ## [1.2.2] - 2019-03-04
 
 ### Added
@@ -75,7 +81,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 This is a first release candidate for production.
 
-[unreleased]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.2...master
+[unreleased]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.3...master
+[1.2.3]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.2...v1.2.3
 [1.2.2]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.1.0...v1.2.0
