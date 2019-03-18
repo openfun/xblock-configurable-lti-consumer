@@ -2,6 +2,7 @@
 Helper function that will be passed to the XBlock.load_class method to filter multiple Python
 entry points for the same XBlock (lti_consumer).
 """
+from xblock.plugin import AmbiguousPluginError, PluginMissingError
 from xmodule import modulestore
 
 
