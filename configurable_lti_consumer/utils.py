@@ -36,8 +36,7 @@ def add_dynamic_components(
             advanced_component_templates["templates"].append(
                 create_template_dict(
                     name=display_name,
-                    category="lti_consumer",
-                    support_level=False,
+                    cat="lti_consumer",
                     boilerplate_name=display_name,
                 )
             )
