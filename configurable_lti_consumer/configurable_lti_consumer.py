@@ -4,7 +4,7 @@ from django.conf import settings
 
 import exrex
 from lti_consumer import LtiConsumerXBlock
-from web_fragments.fragment import Fragment
+from xblock.fragment import Fragment
 from xblockutils.resources import ResourceLoader
 
 from .exceptions import ConfigurableLTIConsumerException
@@ -70,7 +70,7 @@ class ConfigurableLtiConsumerXBlock(LtiConsumerXBlock):
         """
         # We always need to get the `launch_url` from Mongodb because it is used to associate the
         # XBlock with a configuration.
-        if item != "launch_url" and item in LtiConsumerXBlock.editable_field_names:
+        if item != "launch_url" and item in LtiConsumerXBlock.editable_fields:
             configuration = self.get_configuration(self.launch_url)
             if item in configuration.get("defaults", []) and item in configuration.get(
                 "hidden_fields", []
