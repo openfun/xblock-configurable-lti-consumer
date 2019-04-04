@@ -32,11 +32,6 @@ setup(name="xblock-configurable-lti-consumer",
     install_requires=[
         "XBlock",
     ],
-    extras_require={
-        'dev': [
-            'twine==1.11.0',
-        ]
-    },
     entry_points={
         "xblock.v1": [
             "lti_consumer = configurable_lti_consumer:ConfigurableLtiConsumerXBlock",

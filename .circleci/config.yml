@@ -83,13 +83,17 @@ jobs:
             # setup.py (X.Y.Z)
             grep "$(echo $CIRCLE_TAG | sed 's/^v/version="/')" setup.py
 
-  # Publishing to PyPI requires that:
-  #   * you already registered to pypi.org
-  #   * you have define both the TWINE_USERNAME & TWINE_PASSWORD secret
-  #     environment variables in CircleCI UI (with your PyPI credentials)
-  pypi:
+  # Publishing to Gemfury requires that you define the following secrets
+  # environment vars in CircleCI interface:
+  #   - GEMFURY_USER
+  #   - GEMFURY_API_TOKEN
+  gemfury:
+
     docker:
-      - image: circleci/python:2.7-stretch
+      - image: appropriate/curl
+
+    # Work in the same directory as the previous "build" job
+    working_directory: /home/circleci/project
 
     steps:
       - checkout
@@ -99,20 +103,17 @@ jobs:
           keys:
             - v1-distributions-{{ .Revision }}
 
-      # Restore python virtualenv
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "setup.py" }}
-
       - run:
-          name: Publish distributions to PyPI
+          name: Publish distributions to Gemfury
           command: |
             echo ":::: Distributions found ::::"
             ls dist/*
 
             echo ":::: Publish distributions ::::"
-            . venv/bin/activate
-            twine upload dist/*
+            for dist in $(ls dist/*) ; do \
+              echo "Deploy distribution: $dist" ; \
+              curl -F package=@$dist https://${GEMFURY_API_TOKEN}@push.fury.io/${GEMFURY_USER}/ ; \
+            done
 
 # CI workflows
 workflows:
@@ -139,9 +140,9 @@ workflows:
             branches:
               ignore: /.*/
 
-      # Publish build packages only if the build job succeeds and it has been
-      # tagged with a tag starting with the letter v
-      - pypi:
+      # Publish build packages fo Gemfury only if the build job succeeds and
+      # it has been tagged with a tag starting with the letter v
+      - gemfury:
           requires:
             - validate
           filters:
