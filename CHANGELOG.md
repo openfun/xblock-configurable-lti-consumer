@@ -8,6 +8,10 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+# Fixed
+
+- Fix new window launch target regression
+
 ## [1.2.3] - 2019-03-18
 
 ### Fixed
