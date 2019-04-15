@@ -19,7 +19,7 @@ def package_data(pkg, roots):
 
 
 setup(name="xblock-configurable-lti-consumer",
-      version="1.2.3+dogwood",
+      version="1.2.4+dogwood",
       description="This Xblock adds configurability over the original lti_consumer XBlock from edx",
       author="Open FUN (France Universite Numérique)",
       author_email="fun.dev@fun-mooc.fr",
