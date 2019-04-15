@@ -1,6 +1,6 @@
 function configurableLTIConsumerXblockIframeResizerInit(runtime, element, json_args) {
     var $element = $("#" + json_args["element_id"]);
-    LtiConsumerXBlock();  // call inherited lti_consumer javascript initialization
+    LtiConsumerXBlock(runtime, element);  // call inherited lti_consumer javascript initialization
     var $iframe = $element.find('iframe');
     var $div = $element.find("div");
     var automatic_resizing = $div.data('automatic-resizing') === "True"?true:false;
