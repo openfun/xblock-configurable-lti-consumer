@@ -8,6 +8,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.2.4] - 2019-10-09
+
 # Fixed
 
 - Fix new window launch target regression
@@ -85,7 +87,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 This is a first release candidate for production.
 
-[unreleased]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.3...master
+[unreleased]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.4...master
+[1.2.4]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.3...v1.2.4
 [1.2.3]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.2...v1.2.3
 [1.2.2]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.0...v1.2.1
