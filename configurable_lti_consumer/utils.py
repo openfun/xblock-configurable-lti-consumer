@@ -2,6 +2,8 @@
 """
 Helper fonctions
 """
+import inspect
+
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import ugettext as _
@@ -33,13 +35,15 @@ def add_dynamic_components(
                     )
                 )
             seen.add(display_name)
+            params = {"name": display_name, "boilerplate_name": display_name}
+            # Hawthorn+
+            if "category" in inspect.getargspec(create_template_dict).args:
+                params.update({"category": "lti_consumer", "support_level": False})
+            else:
+                # Dogwood/eucalyptus compatibility layer
+                params.update({"cat": "lti_consumer"})
             advanced_component_templates["templates"].append(
-                create_template_dict(
-                    name=display_name,
-                    category="lti_consumer",
-                    support_level=False,
-                    boilerplate_name=display_name,
-                )
+                create_template_dict(**params)
             )
 
     # Remove overriden lti_consumer, if it was added to course advanced modules

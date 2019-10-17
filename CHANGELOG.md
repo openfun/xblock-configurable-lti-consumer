@@ -8,6 +8,11 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+
+- Make the master branch (core releases) compatible with multiple openedx
+  releases (from dogwood to hawthorn+)
+
 ## [1.2.4] - 2019-10-09
 
 ### Fixed
