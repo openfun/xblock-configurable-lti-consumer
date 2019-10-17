@@ -8,6 +8,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.3.0] - 2019-10-17
+
 ### Changed
 
 - Make the master branch (core releases) compatible with multiple openedx
@@ -92,7 +94,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 This is a first release candidate for production.
 
-[unreleased]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.4...master
+[unreleased]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.3.0...master
+[1.3.0]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.4...v1.3.0
 [1.2.4]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.3...v1.2.4
 [1.2.3]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.2...v1.2.3
 [1.2.2]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.1...v1.2.2
