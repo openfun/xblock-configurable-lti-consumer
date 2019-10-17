@@ -4,7 +4,15 @@ from django.conf import settings
 
 import exrex
 from lti_consumer import LtiConsumerXBlock
-from web_fragments.fragment import Fragment
+
+# OpenEdx release compatibility layer
+try:
+    # Hawthorn+
+    from web_fragments.fragment import Fragment
+except ImportError:
+    # Dogwood/Eucalyptus
+    from xblock.fragment import Fragment
+
 from xblockutils.resources import ResourceLoader
 
 from .exceptions import ConfigurableLTIConsumerException
@@ -68,9 +76,13 @@ class ConfigurableLtiConsumerXBlock(LtiConsumerXBlock):
         default AND are hidden) and default to the normal behavior which is to retrieve the value
         stored in Mongodb.
         """
+        editable_field_names = getattr(LtiConsumerXBlock, "editable_field_names", None)
+        # Dogwood/eucalyptus compatibility layer
+        if editable_field_names is None:
+            editable_field_names = LtiConsumerXBlock.editable_fields
         # We always need to get the `launch_url` from Mongodb because it is used to associate the
         # XBlock with a configuration.
-        if item != "launch_url" and item in LtiConsumerXBlock.editable_field_names:
+        if item != "launch_url" and item in editable_field_names:
             configuration = self.get_configuration(self.launch_url)
             if item in configuration.get("defaults", []) and item in configuration.get(
                 "hidden_fields", []
