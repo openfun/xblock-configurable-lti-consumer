@@ -31,6 +31,7 @@ setup(name="xblock-configurable-lti-consumer",
       ],
     install_requires=[
         "XBlock",
+        "exrex==0.10.5",
     ],
     entry_points={
         "xblock.v1": [
