@@ -8,11 +8,12 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-## 2019-11-15
+## [1.2.5] - 2019-11-15
 
 # Fixed
 
 - Add missing exrex dependency to packaging
+- Typo in docker environment variables
 
 ## [1.2.4] - 2019-04-15
 
@@ -92,7 +93,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 ## [1.0.0-rc.1] - 2018-11-28
 
 This is a first release candidate for production.
-[unreleased]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.4...master
+[unreleased]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.5...master
+[1.2.5]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.4...v1.2.5
 [1.2.4]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.3...v1.2.4
 [1.2.3]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.2...v1.2.3
 [1.2.2]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.1...v1.2.2
