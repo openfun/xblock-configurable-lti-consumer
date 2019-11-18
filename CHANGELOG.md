@@ -8,6 +8,7 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+- Typo in docker environment variables definition (`.env` file)
 
 ## [1.2.4] - 2019-04-15
 
