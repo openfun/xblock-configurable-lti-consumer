@@ -41,6 +41,7 @@ services:
       - ./config/settings.yml:/config/lms/settings.yml
       - ./data/media:/edx/var/edxapp/media
       - ./data/store:/edx/app/edxapp/data
+      - $HOME/dev/fun/xblock-lti-consumer:/app/deps/src/xblock-lti-consumer
     command: >
       dockerize -wait tcp://mysql:3306 -timeout 60s
         python manage.py lms runserver 0.0.0.0:8000 --settings=fun.docker_run_development
@@ -64,6 +65,7 @@ services:
       - ./data/media:/edx/var/edxapp/media
       - ./data/store:/edx/app/edxapp/data
       - ./docker/files/edx/app/edxapp/edx-platform/cms/djangoapps/contentstore/views/component.py:/edx/app/edxapp/edx-platform/cms/djangoapps/contentstore/views/component.py
+      - $HOME/dev/fun/xblock-lti-consumer:/app/deps/src/xblock-lti-consumer
     command: >
       dockerize -wait tcp://mysql:3306 -timeout 60s
         python manage.py cms runserver 0.0.0.0:8000 --settings=fun.docker_run_development

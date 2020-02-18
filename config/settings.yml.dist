@@ -19,6 +19,7 @@ LTI_XBLOCK_CONFIGURATIONS:
       accept_grades_past_due: False
       ask_to_send_username: True
       ask_to_send_email: True
+      enable_processors: True
     hidden_fields:
       - lti_id
       - description
@@ -34,6 +35,7 @@ LTI_XBLOCK_CONFIGURATIONS:
       - accept_grades_past_due
       - ask_to_send_username
       - ask_to_send_email
+      - enable_processors
   # A configuration that applies to all LTI consumer XBlocks pointing to a launch url on the
   # ltiapps.net domain. It does not add a link to the `Advanced` Component button in the Studio
   - pattern: .*ltiapps\.net.*
@@ -49,6 +51,7 @@ LTI_XBLOCK_CONFIGURATIONS:
       launch_target: new_window
       ask_to_send_username: True
       ask_to_send_email: True
+      enable_processors: True
     hidden_fields:
       - ask_to_send_username
       - ask_to_send_email
@@ -57,3 +60,8 @@ LTI_XBLOCK_SECRETS:
   marsha:
     oauth_consumer_key: InsecureOauthConsumerKey
     shared_secret: InsecureSharedSecret
+
+XBLOCK_SETTINGS:
+  lti_consumer:
+    parameter_processors:
+      - 'tahoe_lti.processors:cohort_info'

@@ -1,4 +1,4 @@
-FROM fundocker/edxapp:hawthorn.1-2.0.1
+FROM fundocker/edxapp:hawthorn.1-3.1.1
 
 ARG USER_ID=1000
 ARG GROUP_ID=1000
@@ -10,8 +10,14 @@ USER root:root
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y \
-    vim && \
+    vim \
+    git && \
     rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /app/deps && \
+    cd /app/deps && \
+    pip install -e git+https://github.com/edx/xblock-lti-consumer.git@v1.2.3#egg=xblock-lti-consumer==1.2.3 && \
+    pip install -e git+https://github.com/appsembler/tahoe-lti.git#egg=tahoe-lti
 
 # Add the non-privileged user that will run the application
 RUN groupadd -f --gid ${GROUP_ID} edx && \
