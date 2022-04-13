@@ -8,6 +8,10 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- Allow display-capture and autoplay in the iframe
+
 ## [1.3.0] - 2019-10-17
 
 ### Changed
