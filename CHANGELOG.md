@@ -8,6 +8,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.4.0] - 2022-04-13
+
 ### Added
 
 - Allow display-capture and autoplay in the iframe
@@ -98,7 +100,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 This is a first release candidate for production.
 
-[unreleased]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.3.0...master
+[unreleased]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.4.0...master
+[1.4.0]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.4...v1.3.0
 [1.2.4]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.3...v1.2.4
 [1.2.3]: https://github.com/openfun/xblock-configurable-lti-consumer/compare/v1.2.2...v1.2.3
