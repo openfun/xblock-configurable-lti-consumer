@@ -8,6 +8,10 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed
+
+- Allow display-capture and autoplay to all origins
+
 ## [1.4.0] - 2022-04-13
 
 ### Added
